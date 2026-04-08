@@ -1,0 +1,14 @@
+/Users/canarda/CSharpLearning/HelloWorld/bin/Debug/net10.0/HelloWorld
+/Users/canarda/CSharpLearning/HelloWorld/bin/Debug/net10.0/HelloWorld.deps.json
+/Users/canarda/CSharpLearning/HelloWorld/bin/Debug/net10.0/HelloWorld.runtimeconfig.json
+/Users/canarda/CSharpLearning/HelloWorld/bin/Debug/net10.0/HelloWorld.dll
+/Users/canarda/CSharpLearning/HelloWorld/bin/Debug/net10.0/HelloWorld.pdb
+/Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/HelloWorld.GeneratedMSBuildEditorConfig.editorconfig
+/Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/HelloWorld.AssemblyInfoInputs.cache
+/Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/HelloWorld.AssemblyInfo.cs
+/Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/HelloWorld.csproj.CoreCompileInputs.cache
+/Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/HelloWorld.dll
+/Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/refint/HelloWorld.dll
+/Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/HelloWorld.pdb
+/Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/HelloWorld.genruntimeconfig.cache
+/Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/ref/HelloWorld.dll
