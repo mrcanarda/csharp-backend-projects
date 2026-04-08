@@ -12,3 +12,4 @@
 /Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/HelloWorld.pdb
 /Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/HelloWorld.genruntimeconfig.cache
 /Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/ref/HelloWorld.dll
+/Users/canarda/CSharpLearning/HelloWorld/obj/Debug/net10.0/HelloWorld.sourcelink.json
