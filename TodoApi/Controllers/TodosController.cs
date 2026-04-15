@@ -1,5 +1,6 @@
 // Controllers/TodosController.cs
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using TodoApi.Services;
 using TodoApi.Models; // add this
 
@@ -7,6 +8,7 @@ namespace TodoApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize] // add this 
 public class TodoController : ControllerBase
 {
     private readonly ITodoService _todoService;
@@ -24,6 +26,7 @@ public class TodoController : ControllerBase
 [HttpPost]
 public IActionResult Add([FromBody] CreateTodoDto dto)
 {
+//    Console.WriteLine("Add method called!"); // add this
     _todoService.Add(dto);
     var all = _todoService.GetAll();
     var created = all.Last();

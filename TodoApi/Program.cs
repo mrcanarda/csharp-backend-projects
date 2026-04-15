@@ -1,21 +1,48 @@
-using TodoApi.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TodoApi.Services;
-var builder = WebApplication.CreateBuilder(args); 
+using TodoApi.Middleware;
 
-builder.Services.AddControllers(); 
-builder.Services.AddOpenApi(); 
+var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+builder.Services.AddOpenApi();
 builder.Services.AddScoped<ITodoService, TodoService>();
 
-var app = builder.Build(); 
+// JWT Authentication
+var jwtKey = builder.Configuration["Jwt:Key"]!;
+var jwtIssuer = builder.Configuration["Jwt:Issuer"]!;
+var jwtAudience = builder.Configuration["Jwt:Audience"]!;
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtIssuer,
+            ValidAudience = jwtAudience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+        };
+    });
+
+builder.Services.AddAuthorization();
+
+var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi(); 
+    app.MapOpenApi();
 }
 
-app.UseHttpsRedirection(); 
-app.UseMiddleware<RequestLoggingMiddleware>(); //add this 
-app.MapControllers(); 
+app.UseHttpsRedirection();
+app.UseMiddleware<RequestLoggingMiddleware>();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
 
-app.Run(); 
+app.Run();
