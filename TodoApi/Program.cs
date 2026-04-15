@@ -1,10 +1,11 @@
+using TodoApi.Middleware;
 using TodoApi.Services;
 var builder = WebApplication.CreateBuilder(args); 
 
 builder.Services.AddControllers(); 
 builder.Services.AddOpenApi(); 
 
-builder.Services.AddSingleton<ITodoService, TodoService>();
+builder.Services.AddScoped<ITodoService, TodoService>();
 
 var app = builder.Build(); 
 
@@ -14,6 +15,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection(); 
+app.UseMiddleware<RequestLoggingMiddleware>(); //add this 
 app.MapControllers(); 
 
 app.Run(); 
