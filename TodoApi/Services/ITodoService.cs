@@ -1,7 +1,10 @@
-namespace TodoApi.Services; 
+using TodoApi.Models;
+
+namespace TodoApi.Services;
+
 
 public interface ITodoService
 {
-    List<string> GetAll(); 
-    void Add(string item); 
+    List<TodoItem> GetAll(); 
+    void Add(CreateTodoDto dto); 
 }

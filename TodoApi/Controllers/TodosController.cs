@@ -1,5 +1,7 @@
+// Controllers/TodosController.cs
 using Microsoft.AspNetCore.Mvc;
 using TodoApi.Services;
+using TodoApi.Models; // add this
 
 namespace TodoApi.Controllers;
 
@@ -19,11 +21,21 @@ public class TodoController : ControllerBase
     {
         return Ok(_todoService.GetAll());
     }
-
-    [HttpPost]
-    public IActionResult Add([FromBody] string item)
+[HttpPost]
+public IActionResult Add([FromBody] CreateTodoDto dto)
+{
+    _todoService.Add(dto);
+    var all = _todoService.GetAll();
+    var created = all.Last();
+    
+    var response = new TodoResponseDto
     {
-        _todoService.Add(item);
-        return Ok();
-    }
+        Id = created.Id,
+        Title = created.Title,
+        IsCompleted = created.IsCompleted,
+        CreatedAt = created.CreatedAt
+    };
+    
+    return Created("", response);
+}
 }
