@@ -1,67 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
-using TodoApi.Models;
+using TodoApi.Services;
 
 namespace TodoApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TodosController : ControllerBase
+public class TodoController : ControllerBase
 {
-    // Temporary in-memory list — will replace with DB later
-    private static List<TodoItem> _todos = new();
-    private static int _nextId = 1;
+    private readonly ITodoService _todoService;
 
-    // GET api/todos
+    public TodoController(ITodoService todoService)
+    {
+        _todoService = todoService;
+    }
+
     [HttpGet]
-    public ActionResult<List<TodoItem>> GetAll()
+    public IActionResult GetAll()
     {
-        return Ok(_todos);
+        return Ok(_todoService.GetAll());
     }
 
-    // GET api/todos/1
-    [HttpGet("{id}")]
-    public ActionResult<TodoItem> GetById(int id)
-    {
-        var todo = _todos.FirstOrDefault(t => t.Id == id);
-        if (todo == null)
-            return NotFound();
-        return Ok(todo);
-    }
-
-    // POST api/todos
     [HttpPost]
-    public ActionResult<TodoItem> Create(TodoItem todo)
+    public IActionResult Add([FromBody] string item)
     {
-        todo.Id = _nextId++;
-        todo.CreatedAt = DateTime.UtcNow;
-        _todos.Add(todo);
-        return CreatedAtAction(nameof(GetById), new { id = todo.Id }, todo);
-    }
-
-    // PUT api/todos/1
-    [HttpPut("{id}")]
-    public ActionResult Update(int id, TodoItem updated)
-    {
-        var todo = _todos.FirstOrDefault(t => t.Id == id);
-        if (todo == null)
-            return NotFound();
-
-        todo.Title = updated.Title;
-        todo.Description = updated.Description;
-        todo.IsCompleted = updated.IsCompleted;
-
-        return NoContent();
-    }
-
-    // DELETE api/todos/1
-    [HttpDelete("{id}")]
-    public ActionResult Delete(int id)
-    {
-        var todo = _todos.FirstOrDefault(t => t.Id == id);
-        if (todo == null)
-            return NotFound();
-
-        _todos.Remove(todo);
-        return NoContent();
+        _todoService.Add(item);
+        return Ok();
     }
 }
