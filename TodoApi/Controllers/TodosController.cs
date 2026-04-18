@@ -21,6 +21,7 @@ public class TodoController : ControllerBase
     [HttpGet]
     public IActionResult GetAll()
     {
+        throw new Exception("Test exception");
         return Ok(_todoService.GetAll());
     }
 [HttpPost]

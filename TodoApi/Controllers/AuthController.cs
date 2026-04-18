@@ -21,6 +21,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginDto dto)
     {
+         throw new Exception("Test exception");
         // Hardcoded user for now — database later
         if (dto.Username != "can" || dto.Password != "1234")
             return Unauthorized("Invalid credentials.");
