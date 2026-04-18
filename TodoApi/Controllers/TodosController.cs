@@ -2,44 +2,46 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using TodoApi.Services;
-using TodoApi.Models; // add this
+using TodoApi.Models;
 
 namespace TodoApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize] // add this 
+[Authorize]
 public class TodoController : ControllerBase
 {
     private readonly ITodoService _todoService;
+    private readonly ILogger<TodoController> _logger;
 
-    public TodoController(ITodoService todoService)
+    public TodoController(ITodoService todoService, ILogger<TodoController> logger)
     {
         _todoService = todoService;
+        _logger = logger;
     }
 
     [HttpGet]
     public IActionResult GetAll()
     {
-        throw new Exception("Test exception");
+        _logger.LogInformation("GetAll called");
         return Ok(_todoService.GetAll());
     }
-[HttpPost]
-public IActionResult Add([FromBody] CreateTodoDto dto)
-{
-//    Console.WriteLine("Add method called!"); // add this
-    _todoService.Add(dto);
-    var all = _todoService.GetAll();
-    var created = all.Last();
-    
-    var response = new TodoResponseDto
+
+    [HttpPost]
+    public IActionResult Add([FromBody] CreateTodoDto dto)
     {
-        Id = created.Id,
-        Title = created.Title,
-        IsCompleted = created.IsCompleted,
-        CreatedAt = created.CreatedAt
-    };
-    
-    return Created("", response);
-}
+        _todoService.Add(dto);
+        var all = _todoService.GetAll();
+        var created = all.Last();
+
+        var response = new TodoResponseDto
+        {
+            Id = created.Id,
+            Title = created.Title,
+            IsCompleted = created.IsCompleted,
+            CreatedAt = created.CreatedAt
+        };
+
+        return Created("", response);
+    }
 }
