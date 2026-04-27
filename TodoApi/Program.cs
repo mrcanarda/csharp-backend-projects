@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using TodoApi.Data;
 using Scalar.AspNetCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
