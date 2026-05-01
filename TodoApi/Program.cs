@@ -6,8 +6,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TodoApi.Services;
 using TodoApi.Middleware;
-using TodoApi.Interfaces; 
 using TodoApi.Repositories;
+using TodoApi.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<ITodoService, TodoService>();
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
