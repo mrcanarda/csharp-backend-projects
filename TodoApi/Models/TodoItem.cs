@@ -7,4 +7,7 @@ public class TodoItem
     public string? Description {get; set; }
     public bool IsCompleted {get; set; }
     public DateTime CreatedAt {get; set; } = DateTime.UtcNow;
+ 
+    public int UserId {get; set;} // Foreign Key
+    public User? User {get; set;}
  }

@@ -18,6 +18,14 @@ public class AppDbContext : DbContext
     // 3. DbSet = raftaki kitap koleksiyonu
     // Todos = SQL'deki "Todos" tablosu
     public DbSet<TodoItem> Todos { get; set; }
+    public DbSet<User> Users {get; set;}
+
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>().HasData(
+        new User { Id = 1, Username = "can", Email = "can@example.com" }
+    );
+}
 }
 
 public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>

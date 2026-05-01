@@ -12,4 +12,7 @@ public class CreateTodoDto
 
     [MaxLength(500, ErrorMessage = "Description cannot exceed 500 characters.")]
     public string? Description { get; set; }
+
+    [Required]
+    public int UserId {get; set;}
 }

@@ -27,7 +27,8 @@ public void Add(CreateTodoDto dto)
         Title = dto.Title,
         Description = dto.Description,
         IsCompleted = false,
-        CreatedAt = DateTime.UtcNow
+        CreatedAt = DateTime.UtcNow,
+        UserId = dto.UserId
     };
 
     _context.Todos.Add(item);
