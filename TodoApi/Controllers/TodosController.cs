@@ -1,4 +1,3 @@
-// Controllers/TodosController.cs
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using TodoApi.Services;
@@ -43,5 +42,19 @@ public class TodoController : ControllerBase
         };
 
         return Created("", response);
+    }
+
+    [HttpGet("completed")]
+    public IActionResult GetCompleted()
+    {
+        return Ok(_todoService.GetCompleted());
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult GetById(int id)
+    {
+        var todo = _todoService.GetById(id);
+        if (todo == null) return NotFound();
+        return Ok(todo);
     }
 }

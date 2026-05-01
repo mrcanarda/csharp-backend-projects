@@ -33,4 +33,17 @@ public void Add(CreateTodoDto dto)
     _context.Todos.Add(item);
     _context.SaveChanges();
 }
+
+public List<TodoItem> GetCompleted()
+{
+    return _context.Todos.Where(t => t.IsCompleted == true).ToList();
 }
+
+public TodoItem? GetById(int id)
+{
+    return _context.Todos.FirstOrDefault(t => t.Id == id);
+}
+
+
+}
+
