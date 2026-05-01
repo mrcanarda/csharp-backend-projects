@@ -10,4 +10,6 @@ public class TodoItem
  
     public int UserId {get; set;} // Foreign Key
     public User? User {get; set;}
+
+    public List<Tag> Tags{get; set;} = new (); 
  }
