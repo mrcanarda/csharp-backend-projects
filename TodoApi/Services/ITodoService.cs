@@ -8,4 +8,8 @@ public interface ITodoService
     void Add(CreateTodoDto dto);
     List<TodoItem> GetCompleted();
     TodoItem? GetById(int id);
+
+    Task<List<TodoItem>> GetAllAsync();
+    Task<TodoItem?> GetByIdAsync(int id);
+    Task AddAsync(CreateTodoDto dto);
 }
