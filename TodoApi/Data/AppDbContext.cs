@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Design;
 namespace TodoApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TodoApi.Models;
 
 
@@ -25,6 +26,12 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<User>().HasData(
         new User { Id = 1, Username = "can", Email = "can@example.com" }
+    );
+
+    modelBuilder.Entity<Tag>().HasData(
+        new Tag { Id = 1, Name = "urgent" },
+        new Tag { Id = 2, Name = "backend" },
+        new Tag { Id = 3, Name = "frontend" }
     );
 }
 }
