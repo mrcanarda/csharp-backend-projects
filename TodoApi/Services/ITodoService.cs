@@ -12,4 +12,6 @@ public interface ITodoService
     Task<List<TodoItem>> GetAllAsync();
     Task<TodoItem?> GetByIdAsync(int id);
     Task AddAsync(CreateTodoDto dto);
+    Task AddWithTransactionAsync(CreateTodoDto dto);
+
 }

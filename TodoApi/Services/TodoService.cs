@@ -70,6 +70,30 @@ public async Task AddAsync(CreateTodoDto dto)
     await _context.Todos.AddAsync(item);
     await _context.SaveChangesAsync();
 }
+public async Task AddWithTransactionAsync(CreateTodoDto dto)
+{
+    using var transaction = await _context.Database.BeginTransactionAsync();
 
+    try
+    {
+        var item = new TodoItem
+        {
+            Title = dto.Title,
+            Description = dto.Description,
+            IsCompleted = false,
+            CreatedAt = DateTime.UtcNow,
+            UserId = dto.UserId
+        };
+
+        await _context.Todos.AddAsync(item);
+        await _context.SaveChangesAsync();
+        await transaction.CommitAsync();
+    }
+    catch
+    {
+        await transaction.RollbackAsync();
+        throw;
+    }
+}
 }
 
